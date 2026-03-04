@@ -13,7 +13,6 @@ index.html
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-        /* RESET E DIMENSIONI PROPORZIONALI */
         * { 
             font-family: 'MedievalSharp', cursive !important; 
             box-sizing: border-box; 
@@ -21,53 +20,61 @@ index.html
 
         :root {
             --nero: #1A1A1B; --cremisi: #990000;
-            --pergamena: #f4e4bc; --pergamena-scura: #e2d1a6;
+            --pergamena-chiara: #FDF5E6; /* OldLace: un crema molto riposante */
+            --pergamena-header: #f4e4bc;
+            --pergamena-scura: #e2d1a6;
             --lapis: #26619C; --rame: #B87333; --smeraldo: #50C878; 
             --rubino: #E0115F; --argento: #C0C0C0;
             
-            /* SCALA DIMENSIONI */
-            --font-small: 18px;    /* Equivalente leggibilità Calibri 12 */
-            --font-medium: 22px;   /* Per testi in evidenza */
-            --font-large: 38px;    /* Per titoli di sezione */
-            --font-header: 85px;   /* Per il logo principale */
+            /* DIMENSIONI INCREMENTATE */
+            --font-small: 20px;    /* Da 18px a 20px */
+            --font-medium: 26px;   /* Da 22px a 26px */
+            --font-large: 45px;    /* Da 38px a 45px */
+            --font-header: 100px;  /* Da 85px a 100px */
         }
 
         body { 
-            background-color: white; 
+            background-color: var(--pergamena-chiara); 
             color: var(--nero); 
             margin: 0; 
             font-size: var(--font-small); 
         }
 
-        /* HEADER MAESTOSO */
+        /* HEADER PERFETTAMENTE CENTRATO E MAESTOSO */
         header {
-            background: linear-gradient(to bottom, var(--pergamena), var(--pergamena-scura));
-            border-bottom: 6px double var(--nero);
-            padding: 60px 20px;
+            background: linear-gradient(to bottom, var(--pergamena-header), var(--pergamena-scura));
+            border-bottom: 8px double var(--nero);
+            height: 300px; /* Altezza fissa per centratura assoluta */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            width: 100%;
         }
 
         header h1 {
             margin: 0;
+            padding: 0;
             font-size: var(--font-header);
-            letter-spacing: 15px;
+            letter-spacing: 20px;
             text-transform: uppercase;
             color: var(--nero);
-            text-shadow: 5px 5px 0px var(--cremisi);
+            text-shadow: 6px 6px 0px var(--cremisi);
+            line-height: 1;
         }
 
         /* LAYOUT */
-        .layout { display: grid; grid-template-columns: 240px 1fr 240px; min-height: 80vh; }
-        .sidebar { padding: 25px; border: 1px solid #eee; text-align: center; }
+        .layout { display: grid; grid-template-columns: 260px 1fr 260px; min-height: 80vh; }
+        .sidebar { padding: 30px; border: 1px solid rgba(0,0,0,0.05); text-align: center; }
 
         /* NAVIGAZIONE STENDARDI */
-        nav { display: flex; justify-content: center; gap: 25px; padding: 50px 0; }
+        nav { display: flex; justify-content: center; gap: 30px; padding: 60px 0; }
         .stendardo {
-            width: 140px; height: 190px; display: flex; align-items: center; justify-content: center;
+            width: 150px; height: 210px; display: flex; align-items: center; justify-content: center;
             text-align: center; color: white; font-weight: bold; 
-            font-size: 20px; /* Testo negli stendardi più leggibile */
+            font-size: 24px;
             clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 85%, 0% 100%);
-            cursor: pointer; border: none; transition: 0.3s; padding: 15px;
+            cursor: pointer; border: none; transition: 0.3s; padding: 20px;
         }
         .stendardo:hover { transform: translateY(15px); filter: brightness(1.2); }
         
@@ -78,42 +85,43 @@ index.html
         .argento { background-color: var(--argento); color: var(--nero); }
 
         /* CONTENUTO PUBBLICO */
-        main { padding: 0 50px; }
+        main { padding: 0 60px; }
         .page-title { 
             color: var(--cremisi); 
             text-align: center; 
             font-size: var(--font-large); 
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            text-decoration: underline double var(--nero);
         }
         .content-box { 
             font-size: var(--font-medium); 
-            line-height: 1.8; 
+            line-height: 1.9; 
             text-align: justify;
         }
 
         /* VARCO ACCESSO */
         #access-vault {
             display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.97); z-index: 9999;
+            background: rgba(0,0,0,0.98); z-index: 9999;
             align-items: center; justify-content: center; flex-direction: column;
         }
-        .vault-card { background: var(--pergamena); border: 8px solid var(--cremisi); padding: 60px; text-align: center; box-shadow: 0 0 100px rgba(153,0,0,0.5); }
-        .vault-input { font-size: 3em; text-align: center; width: 100%; margin: 30px 0; border: none; border-bottom: 3px solid var(--nero); background: transparent; outline: none; }
+        .vault-card { background: var(--pergamena-header); border: 10px solid var(--cremisi); padding: 70px; text-align: center; box-shadow: 0 0 120px rgba(153,0,0,0.6); }
+        .vault-input { font-size: 4em; text-align: center; width: 100%; margin: 30px 0; border: none; border-bottom: 4px solid var(--nero); background: transparent; outline: none; color: var(--nero); }
 
         /* GESTIONE LIVE */
         #admin-panel { 
             display: none; position: fixed; top:0; left:0; width:100%; height:100vh;
             background: #f0f0f1; z-index: 10000;
         }
-        .admin-grid { display: grid; grid-template-columns: 450px 1fr; height: 100%; }
-        .admin-ctrl { background: #fff; border-right: 4px solid var(--argento); padding: 30px; overflow-y: auto; }
-        .admin-live { background: #fff; padding: 50px; overflow-y: auto; }
+        .admin-grid { display: grid; grid-template-columns: 500px 1fr; height: 100%; }
+        .admin-ctrl { background: #fff; border-right: 5px solid var(--argento); padding: 40px; overflow-y: auto; }
+        .admin-live { background: var(--pergamena-chiara); padding: 60px; overflow-y: auto; }
 
-        .form-card { background: #f4f4f4; border: 2px solid #ccc; padding: 20px; margin-bottom: 25px; }
-        input, textarea, select { font-size: 16px; width: 100%; padding: 12px; margin: 10px 0; }
-        .btn-wp { background: var(--lapis); color: white; border: none; padding: 20px; width: 100%; cursor: pointer; font-size: 22px; text-transform: uppercase; }
-        .btn-exit { background: var(--cremisi); color: white; border: none; padding: 15px; cursor: pointer; margin-bottom: 25px; width: 100%; font-size: 18px; }
+        .form-card { background: #fdfdfd; border: 2px solid #bbb; padding: 25px; margin-bottom: 30px; }
+        input, textarea, select { font-size: 18px; width: 100%; padding: 15px; margin: 10px 0; }
+        .btn-wp { background: var(--lapis); color: white; border: none; padding: 25px; width: 100%; cursor: pointer; font-size: 26px; text-transform: uppercase; border-radius: 5px; }
+        .btn-exit { background: var(--cremisi); color: white; border: none; padding: 15px; cursor: pointer; margin-bottom: 30px; width: 100%; font-size: 20px; }
     </style>
 </head>
 <body>
@@ -137,7 +145,7 @@ index.html
         <div id="content-view">
             <h2 id="view-title" class="page-title">Cronache della Gilda</h2>
             <div id="view-media"></div>
-            <div id="view-text" class="content-box">In attesa di ordini...</div>
+            <div id="view-text" class="content-box">Le cronache stanno prendendo forma...</div>
         </div>
     </main>
 
@@ -146,22 +154,22 @@ index.html
 
 <div id="access-vault">
     <div class="vault-card">
-        <h2 style="font-size: 40px; color:var(--cremisi)">SBLOCCA LIVE FORGE</h2>
-        <p style="font-size: 20px;">Inserisci il sigillo di gestione</p>
+        <h2 style="font-size: 50px; color:var(--cremisi)">LIVE FORGE</h2>
+        <p style="font-size: 24px;">Inserisci il sigillo di comando</p>
         <input type="password" id="vault-pass" class="vault-input">
-        <button class="btn-wp" onclick="verifyVault()">IDENTIFICATI</button>
-        <p onclick="hideVault()" style="cursor:pointer; text-decoration: underline; margin-top: 30px; font-size: 20px;">Annulla</p>
+        <button class="btn-wp" onclick="verifyVault()">SBLOCCA</button>
+        <p onclick="hideVault()" style="cursor:pointer; text-decoration: underline; margin-top: 40px; font-size: 22px;">Torna alla Gilda</p>
     </div>
 </div>
 
 <div id="admin-panel">
     <div class="admin-grid">
         <div class="admin-ctrl">
-            <button class="btn-exit" onclick="location.reload()">← ESCI DALLA BACHECA</button>
-            <h2 style="font-size: 32px; color:var(--cremisi)">Live Forge</h2>
+            <button class="btn-exit" onclick="location.reload()">← CHIUDI BACHECA</button>
+            <h2 style="font-size: 38px; color:var(--cremisi)">Live Forge</h2>
             
             <div class="form-card">
-                <h3 style="font-size: 24px;">Editor Sezione</h3>
+                <h3 style="font-size: 28px;">Modifica Sezione</h3>
                 <select id="adm-page" onchange="syncFields()">
                     <option value="news">News</option>
                     <option value="forum">Forum</option>
@@ -169,15 +177,15 @@ index.html
                     <option value="quest">Quest</option>
                 </select>
                 <input type="text" id="adm-title" oninput="livePrev()" placeholder="Titolo">
-                <textarea id="adm-text" rows="12" oninput="livePrev()" placeholder="Contenuto HTML"></textarea>
-                <input type="text" id="adm-media" oninput="livePrev()" placeholder="URL Immagine">
-                <input type="text" id="adm-link" oninput="livePrev()" placeholder="Link Ipertestuale">
-                <button class="btn-wp" onclick="saveData()">SALVA NEL DATABASE</button>
+                <textarea id="adm-text" rows="14" oninput="livePrev()" placeholder="Contenuto HTML"></textarea>
+                <input type="text" id="adm-media" oninput="livePrev()" placeholder="URL Immagine Principale">
+                <input type="text" id="adm-link" oninput="livePrev()" placeholder="Link Ipertestuale (Pulsante)">
+                <button class="btn-wp" onclick="saveData()">INCIDI NEL DATABASE</button>
             </div>
         </div>
 
         <div class="admin-live">
-            <div style="text-align:center; opacity:0.5; font-size: 16px;">--- ANTEPRIMA LIVE ---</div>
+            <div style="text-align:center; opacity:0.4; font-size: 18px; margin-bottom: 20px;">[ ANTEPRIMA IN TEMPO REALE ]</div>
             <h2 id="prev-title" class="page-title"></h2>
             <div id="prev-media"></div>
             <div id="prev-text" class="content-box"></div>
@@ -186,6 +194,7 @@ index.html
 </div>
 
 <script>
+    // COLLEGA QUI I TUOI DATI SUPABASE
     const SB_URL = 'IL_TUO_URL_SUPABASE';
     const SB_KEY = 'LA_TUA_ANON_KEY';
     const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
@@ -195,8 +204,8 @@ index.html
         if(data) {
             document.getElementById('view-title').innerText = data.title;
             document.getElementById('view-text').innerHTML = data.content;
-            document.getElementById('view-media').innerHTML = data.media_url ? `<img src="${data.media_url}" style="width:100%; border-radius:10px; margin-bottom:20px;">` : '';
-            if(data.external_link) document.getElementById('view-text').innerHTML += `<br><center><a href="${data.external_link}" target="_blank" style="color:var(--cremisi); font-weight:bold;">[ ACCEDI AL COLLEGAMENTO ]</a></center>`;
+            document.getElementById('view-media').innerHTML = data.media_url ? `<img src="${data.media_url}" style="width:100%; border-radius:15px; margin-bottom:30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">` : '';
+            if(data.external_link) document.getElementById('view-text').innerHTML += `<br><center><a href="${data.external_link}" target="_blank" style="color:var(--cremisi); font-weight:bold; font-size:1.2em;">[ ACCEDI AL COLLEGAMENTO ]</a></center>`;
         }
     }
 
@@ -205,14 +214,14 @@ index.html
     function verifyVault() {
         if(document.getElementById('vault-pass').value === "SILVER00") {
             hideVault(); document.getElementById('admin-panel').style.display = 'block'; syncFields();
-        } else { alert("Sigillo Errato"); }
+        } else { alert("Sigillo non riconosciuto."); }
     }
 
     function livePrev() {
         document.getElementById('prev-title').innerText = document.getElementById('adm-title').value;
         document.getElementById('prev-text').innerHTML = document.getElementById('adm-text').value;
         const img = document.getElementById('adm-media').value;
-        document.getElementById('prev-media').innerHTML = img ? `<img src="${img}" style="width:100%; border-radius:10px;">` : '';
+        document.getElementById('prev-media').innerHTML = img ? `<img src="${img}" style="width:100%; border-radius:15px;">` : '';
     }
 
     async function syncFields() {
@@ -236,8 +245,8 @@ index.html
             external_link: document.getElementById('adm-link').value
         };
         const { error } = await supabaseClient.from('isekai_pages').update(upd).eq('slug', s);
-        if(!error) alert("Modifiche incise nelle cronache con successo!");
-        else alert("Errore durante l'incisione: " + error.message);
+        if(!error) alert("Cronache aggiornate con successo!");
+        else alert("Errore durante il salvataggio: " + error.message);
     }
 
     window.onload = () => changePage('news');
