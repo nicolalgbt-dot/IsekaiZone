@@ -19,7 +19,12 @@ index.html
             --nero: #1A1A1B; --cremisi: #990000;
             --pergamena-chiara: #FDF5E6; --pergamena-header: #f4e4bc; --pergamena-scura: #e2d1a6;
             --font-medium: 22px; --font-large: 40px; --font-header: 80px;
-            --legno-asta: #3e2723; /* Asta unica per tutti gli stendardi */
+            
+            /* SCELTA DEL LEGNO PER LE ASTE */
+            --legno-ciliegio: #7c3a27; /* Caldo e rossiccio */
+            --legno-betulla: #d9c5a3;  /* Chiaro e naturale */
+            
+            --legno-asta: var(--legno-ciliegio); /* Cambia qui in var(--legno-betulla) se preferisci */
         }
 
         body { background-color: var(--pergamena-chiara); color: var(--nero); margin: 0; padding: 0; overflow-x: hidden; }
@@ -60,19 +65,20 @@ index.html
             animation: swing 4.5s infinite ease-in-out;
             clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 88%, 0% 100%);
             
-            /* ASTA UNIFORME PER TUTTI */
-            border-top: 12px solid var(--legno-asta);
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+            /* ASTA UNIFORME */
+            border-top: 14px solid var(--legno-asta);
+            /* Effetto venatura/riflesso sull'asta */
+            box-shadow: inset 0 2px 2px rgba(255,255,255,0.2), 0 10px 15px rgba(0,0,0,0.3);
+            
             background-image: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.2) 100%);
         }
 
         .stendardo:hover { 
             transform: translateY(15px) rotateX(15deg) scale(1.1); 
-            filter: brightness(1.1) drop-shadow(0 20px 20px rgba(0,0,0,0.4)); 
+            filter: brightness(1.1);
             animation-play-state: paused; 
         }
 
-        /* IDENTITÀ CROMATICA SENZA PRIVILEGI DI DESIGN */
         .diamante { 
             background-color: #b9f2ff !important; 
             color: #1a4670 !important; 
