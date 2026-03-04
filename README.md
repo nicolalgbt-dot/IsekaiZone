@@ -18,92 +18,101 @@ index.html
         :root {
             --nero: #1A1A1B; --cremisi: #990000;
             --pergamena-chiara: #FDF5E6; --pergamena-header: #f4e4bc; --pergamena-scura: #e2d1a6;
-            --font-medium: 26px; --font-large: 45px; --font-header: 100px;
+            --font-medium: 22px; --font-large: 40px; --font-header: 80px;
         }
 
-        body { background-color: var(--pergamena-chiara); color: var(--nero); margin: 0; padding: 0; }
+        body { background-color: var(--pergamena-chiara); color: var(--nero); margin: 0; padding: 0; overflow-x: hidden; }
 
-        /* BARRA GESTIONE (WP STYLE) */
+        /* BARRA GESTIONE */
         #wp-admin-bar {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 55px;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 50px;
             background: #1d2327; color: #fff; z-index: 10001; align-items: center; padding: 0 20px;
             justify-content: space-between; border-bottom: 2px solid var(--cremisi);
         }
-        #wp-admin-bar button { font-family: sans-serif !important; font-weight: bold; border: none; cursor: pointer; padding: 8px 15px; border-radius: 4px; }
+        #wp-admin-bar button { font-family: sans-serif !important; font-weight: bold; border: none; cursor: pointer; padding: 6px 12px; border-radius: 4px; }
 
-        /* HEADER CREMISI CENTRATO */
+        /* HEADER */
         header {
             background: linear-gradient(to bottom, var(--pergamena-header), var(--pergamena-scura));
-            border-bottom: 8px double var(--nero);
-            height: 300px; display: flex; align-items: center; justify-content: center; width: 100%;
+            border-bottom: 6px double var(--nero);
+            padding: 40px 0; display: flex; align-items: center; justify-content: center; width: 100%;
         }
-        header h1 { font-size: var(--font-header); letter-spacing: 15px; text-transform: uppercase; color: var(--cremisi); margin: 0; text-align: center; width: 100%; }
+        header h1 { font-size: var(--font-header); letter-spacing: 10px; text-transform: uppercase; color: var(--cremisi); margin: 0; text-align: center; }
 
-        /* NUOVI STENDARDI ARALDICI SLANCIATI */
+        /* STENDARDI ARALDICI REALI */
         .stendardi-wrap { 
-            display: flex; justify-content: center; gap: 20px; padding: 0 20px 40px 20px; 
-            flex-wrap: wrap; align-items: flex-start;
+            display: flex; justify-content: center; gap: 15px; padding: 40px 10px; 
+            flex-wrap: wrap; perspective: 1000px;
+        }
+
+        @keyframes swing {
+            0% { transform: rotateX(0deg); }
+            50% { transform: rotateX(6deg); }
+            100% { transform: rotateX(0deg); }
         }
 
         .stendardo {
-            min-width: 160px; height: 260px;
+            width: 160px; height: 240px;
             display: flex; align-items: center; justify-content: center;
-            text-align: center; color: white; font-weight: bold; font-size: 19px; line-height: 1.2;
-            padding: 25px; cursor: pointer; 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 85%, 0% 100%);
-            background-image: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.2) 100%);
-            border-top: 6px solid rgba(0,0,0,0.4);
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+            text-align: center; color: white; font-weight: bold; font-size: 16px; line-height: 1.2;
+            padding: 20px; cursor: pointer; position: relative;
+            transition: 0.4s ease-in-out;
+            transform-origin: top;
+            animation: swing 4s infinite ease-in-out;
+            
+            /* Forma a punta reale */
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 88%, 0% 100%);
+            
+            /* Asta di legno */
+            border-top: 8px solid #3e2723;
+            
+            /* Effetto tessuto */
+            background-image: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.2) 100%);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
         }
 
         .stendardo:hover { 
-            transform: translateY(15px) scale(1.05);
-            filter: brightness(1.2) drop-shadow(0 15px 20px rgba(0,0,0,0.4));
+            transform: translateY(10px) rotateX(12deg) scale(1.05);
+            filter: brightness(1.1);
+            animation-play-state: paused;
         }
 
-        /* PERGAMENE (COLLEGAMENTI IPERTESTUALI) */
-        .pergamene-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin: 30px 0; }
+        /* PERGAMENE */
+        .pergamene-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 30px 0; }
         .scroll-link {
-            background: #e2d1a6; padding: 12px 35px; position: relative; cursor: pointer;
-            text-decoration: none; color: var(--cremisi); font-size: 22px; font-weight: bold;
-            border-top: 2px solid #b8a078; border-bottom: 2px solid #b8a078;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s;
+            background: #e2d1a6; padding: 10px 25px; position: relative; cursor: pointer;
+            text-decoration: none; color: var(--cremisi); font-size: 20px; font-weight: bold;
+            border-top: 2px solid #b8a078; border-bottom: 2px solid #b8a078; transition: 0.3s;
         }
         .scroll-link::before, .scroll-link::after {
-            content: ''; position: absolute; top: -4px; bottom: -4px; width: 15px;
-            background: #ceb888; border: 2px solid #b8a078; border-radius: 4px;
+            content: ''; position: absolute; top: -4px; bottom: -4px; width: 12px;
+            background: #ceb888; border: 2px solid #b8a078; border-radius: 3px;
         }
-        .scroll-link::before { left: -8px; } .scroll-link::after { right: -8px; }
-        .scroll-link:hover { transform: scale(1.1); background: #f4e4bc; }
+        .scroll-link::before { left: -7px; } .scroll-link::after { right: -7px; }
 
         /* CONTENUTO */
-        main { max-width: 1100px; margin: 0 auto; padding: 0 40px 100px; }
-        .editable-title { color: var(--cremisi); text-align: center; font-size: var(--font-large); margin-bottom: 30px; outline: none; text-transform: uppercase; }
-        .editable-content { font-size: var(--font-medium); line-height: 1.8; text-align: justify; min-height: 300px; outline: none; }
+        main { max-width: 900px; margin: 0 auto; padding: 20px 25px 100px; }
+        .editable-title { color: var(--cremisi); text-align: center; font-size: var(--font-large); margin-bottom: 20px; text-transform: uppercase; }
+        .editable-content { font-size: var(--font-medium); line-height: 1.7; text-align: justify; min-height: 250px; }
 
-        /* VAULT ACCESSO */
-        #access-vault {
+        /* MODALI */
+        #access-vault, #new-page-modal {
             display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.96); z-index: 10000; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.9); z-index: 10000; align-items: center; justify-content: center;
         }
-        .vault-card { background: var(--pergamena-header); border: 10px double var(--cremisi); padding: 50px; text-align: center; width: 450px; }
-        .vault-input { font-size: 35px; text-align: center; width: 100%; border: none; border-bottom: 3px solid var(--nero); background: transparent; outline: none; margin: 25px 0; }
-
-        #new-page-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 10002; align-items: center; justify-content: center; }
-        .modal-box { background: white; padding: 30px; border-radius: 8px; width: 400px; }
+        .vault-card { background: var(--pergamena-header); border: 6px double var(--cremisi); padding: 40px; text-align: center; width: 90%; max-width: 400px; }
+        .vault-input { font-size: 25px; text-align: center; width: 100%; border: none; border-bottom: 2px solid var(--nero); background: transparent; outline: none; margin: 20px 0; }
     </style>
 </head>
 <body>
 
 <div id="wp-admin-bar">
-    <div style="display:flex; gap:15px;">
-        <button onclick="openNewPageModal()" style="background:#50C878; color:white;">+ NUOVA PERGAMENA</button>
+    <div style="display:flex; gap:10px;">
+        <button onclick="openNewPageModal()" style="background:#50C878; color:white;">+ PERGAMENA</button>
     </div>
-    <div style="display:flex; align-items:center; gap:20px;">
-        <span style="font-family:sans-serif !important;">SESSIONE ATTIVA: <strong id="current-page-display">CRONACHE</strong></span>
-        <button onclick="publishChanges()" style="background:#2271b1; color:white;">PUBBLICA</button>
-        <button onclick="location.reload()" style="background:#d63638; color:white;">ESCI</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+        <button onclick="publishChanges()" style="background:#2271b1; color:white;">SALVA</button>
+        <button onclick="location.reload()" style="background:#d63638; color:white;">X</button>
     </div>
 </div>
 
@@ -112,11 +121,11 @@ index.html
 </header>
 
 <div class="stendardi-wrap">
-    <div onclick="changePage('news')" class="stendardo" style="background-color:#26619C">CRONACHE DELLA GILDA</div>
-    <div onclick="changePage('forum')" class="stendardo" style="background-color:#B87333">TAVERNA DELLE BALLATE</div>
-    <div onclick="changePage('abbonamenti')" class="stendardo" style="background-color:#50C878">SIGILLI DELLA PERSEVERANZA</div>
-    <div onclick="changePage('quest')" class="stendardo" style="background-color:#E0115F">ALBERO DELLE QUEST</div>
-    <div onclick="showVault()" class="stendardo" style="background-color:#333333">MINISTERO DELLE VIE</div>
+    <div onclick="changePage('news')" class="stendardo" style="background-color:#1a4670">CRONACHE DELLA GILDA</div>
+    <div onclick="changePage('forum')" class="stendardo" style="background-color:#8d5524">TAVERNA DELLE BALLATE</div>
+    <div onclick="changePage('abbonamenti')" class="stendardo" style="background-color:#388e3c">SIGILLI DELLA PERSEVERANZA</div>
+    <div onclick="changePage('quest')" class="stendardo" style="background-color:#ad0e4a">ALBERO DELLE QUEST</div>
+    <div onclick="showVault()" class="stendardo" style="background-color:#212121">MINISTERO DELLE VIE</div>
 </div>
 
 <main>
@@ -127,88 +136,78 @@ index.html
 
 <div id="access-vault">
     <div class="vault-card">
-        <h2 style="color:var(--cremisi)">SIGILLO DEL MINISTERO</h2>
-        <input type="password" id="vault-pass" class="vault-input" placeholder="Codice Segreto">
-        <button onclick="verifyVault()" style="width:100%; padding:18px; background:var(--cremisi); color:white; border:none; cursor:pointer; font-size:20px; font-weight:bold;">SBLOCCA ARCHIVI</button>
-        <p onclick="document.getElementById('access-vault').style.display='none'" style="cursor:pointer; margin-top:20px; text-decoration:underline;">Torna indietro</p>
+        <h3>SIGILLO DEL MINISTERO</h3>
+        <input type="password" id="vault-pass" class="vault-input" placeholder="Codice...">
+        <button onclick="verifyVault()" style="width:100%; padding:15px; background:var(--cremisi); color:white; border:none; cursor:pointer; font-weight:bold;">SBLOCCA</button>
+        <p onclick="document.getElementById('access-vault').style.display='none'" style="cursor:pointer; margin-top:15px; text-decoration:underline; font-size: 14px;">Chiudi</p>
     </div>
 </div>
 
 <div id="new-page-modal">
-    <div class="modal-box">
-        <h3 style="font-family:sans-serif !important;">Crea Nuova Pergamena</h3>
-        <input type="text" id="new-title" placeholder="Titolo Pagina" style="width:100%; padding:10px; margin-bottom:10px;">
-        <input type="text" id="new-slug" placeholder="slug-senza-spazi" style="width:100%; padding:10px; margin-bottom:10px;">
-        <button onclick="createNewPage()" style="width:100%; padding:10px; background:#2271b1; color:white; border:none; font-weight:bold;">INCIDI NELLA STORIA</button>
+    <div class="vault-card">
+        <h3>Nuova Pergamena</h3>
+        <input type="text" id="new-title" placeholder="Titolo" style="width:100%; padding:10px; margin-bottom:10px;">
+        <input type="text" id="new-slug" placeholder="slug-tecnico" style="width:100%; padding:10px; margin-bottom:10px;">
+        <button onclick="createNewPage()" style="width:100%; padding:10px; background:#2271b1; color:white; border:none; font-weight:bold;">CREA</button>
+        <button onclick="document.getElementById('new-page-modal').style.display='none'" style="width:100%; margin-top:10px; background:none; border:none; text-decoration:underline;">Annulla</button>
     </div>
 </div>
 
 <script>
-    // --- SUPABASE CONFIG ---
     const SB_URL = 'IL_TUO_URL_SUPABASE';
     const SB_KEY = 'LA_TUA_ANON_KEY';
     
     let sb = null;
-    if (SB_URL !== 'IL_TUO_URL_SUPABASE') {
-        sb = supabase.createClient(SB_URL, SB_KEY);
-    }
+    if (SB_URL !== 'IL_TUO_URL_SUPABASE') sb = supabase.createClient(SB_URL, SB_KEY);
 
     let isAdmin = false;
     let currentPage = 'news';
 
-    // VERIFICA MINISTERO
     function verifyVault() {
         if(document.getElementById('vault-pass').value === "SILVER00") {
             isAdmin = true;
             document.getElementById('access-vault').style.display = 'none';
             document.getElementById('wp-admin-bar').style.display = 'flex';
-            document.body.style.paddingTop = '55px';
+            document.body.style.paddingTop = '50px';
             enableEditor();
-        } else { alert("Codice errato, le guardie si avvicinano..."); }
+        } else { alert("Sigillo errato."); }
     }
 
     function showVault() { document.getElementById('access-vault').style.display = 'flex'; }
 
-    // NAVIGAZIONE
     async function changePage(slug) {
         currentPage = slug;
-        document.getElementById('current-page-display').innerText = slug.toUpperCase();
-        
         if(!sb) {
-            document.getElementById('page-title').innerText = "In attesa del database...";
+            document.getElementById('page-title').innerText = "Configura Supabase";
             return;
         }
-
         const { data } = await sb.from('isekai_pages').select('*').eq('slug', slug).single();
         if(data) {
             document.getElementById('page-title').innerText = data.title;
-            document.getElementById('page-content').innerHTML = data.content || '<p>Inizia a scrivere...</p>';
+            document.getElementById('page-content').innerHTML = data.content || '<p>Contenuto vuoto.</p>';
             if(isAdmin) { tinymce.remove(); enableEditor(); }
         }
     }
 
-    // EDITOR WORDPRESS STYLE
     function enableEditor() {
         tinymce.init({
             selector: '.editable-content',
             inline: true,
             menubar: false,
             plugins: 'lists link image table code emoticons',
-            toolbar: 'undo redo | blocks | bold italic underline forecolor | aligncenter | bullist numlist | link image emoticons | code',
+            toolbar: 'undo redo | blocks | bold italic underline forecolor | aligncenter | bullist numlist | link image | code',
             fixed_toolbar_container: '#wp-admin-bar'
         });
         document.getElementById('page-title').contentEditable = true;
     }
 
-    // SALVA
     async function publishChanges() {
         const title = document.getElementById('page-title').innerText;
         const content = tinymce.get('page-content').getContent();
         const { error } = await sb.from('isekai_pages').update({ title, content }).eq('slug', currentPage);
-        if(!error) alert("Cronache Sigillate!");
+        if(!error) alert("Salvato!");
     }
 
-    // CARICA PERGAMENE
     async function loadPergamene() {
         if(!sb) return;
         const { data } = await sb.from('isekai_pages').select('slug, title');
@@ -226,14 +225,11 @@ index.html
     async function createNewPage() {
         const title = document.getElementById('new-title').value;
         const slug = document.getElementById('new-slug').value.toLowerCase().replace(/\s+/g, '-');
-        const { error } = await sb.from('isekai_pages').insert([{ slug, title, content: '<p>Nuova pagina creata.</p>' }]);
+        const { error } = await sb.from('isekai_pages').insert([{ slug, title, content: '<p>Nuova pagina.</p>' }]);
         if(!error) location.reload();
     }
 
-    window.onload = () => {
-        loadPergamene();
-        changePage('news');
-    };
+    window.onload = () => { loadPergamene(); changePage('news'); };
 </script>
 </body>
 </html>
