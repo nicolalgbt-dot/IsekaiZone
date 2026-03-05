@@ -41,21 +41,21 @@ index.html
 
         /* MODALI */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .modal-inner { width: 100%; max-width: 600px; background: #1a1a1b; padding: 35px; border: 2px solid var(--o); color: white; }
+        .modal-inner { width: 100%; max-width: 650px; background: #1a1a1b; padding: 35px; border: 2px solid var(--o); color: white; }
         
         .form-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; margin-bottom: 8px; color: var(--o); font-size: 0.8rem; }
+        label { display: block; margin-bottom: 8px; color: var(--o); font-size: 0.8rem; letter-spacing: 1px; }
         input { width: 100%; padding: 12px; background: #2a2a2b; border: 1px solid #444; color: white; font-family: sans-serif; }
         
-        .btn-action { background: var(--o); color: black; padding: 15px; width: 100%; border: none; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        .btn-action { background: var(--o); color: black; padding: 15px; width: 100%; border: none; cursor: pointer; font-weight: bold; font-size: 1rem; margin-top: 10px; }
         .btn-admin { background: var(--c); color: white; margin-top: 15px; }
 
-        /* DASHBOARD REPARTI */
+        /* CENTRO DI COMANDO - PULITI DAI CODICI */
         .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .dept-card { background: #222; border: 1px solid var(--o); padding: 20px; cursor: pointer; transition: 0.3s; text-align: center; }
-        .dept-card:hover { background: var(--o); color: black; box-shadow: 0 0 20px var(--o); }
-        .dept-card b { display: block; margin-bottom: 5px; }
-        .dept-card small { font-size: 0.7rem; color: #aaa; }
+        .dept-card { background: #1a1a1b; border: 1px solid #444; padding: 25px; cursor: pointer; transition: 0.3s; text-align: center; }
+        .dept-card:hover { border-color: var(--o); background: #222; box-shadow: 0 0 15px var(--o); }
+        .dept-card b { display: block; margin-bottom: 8px; font-size: 1.1rem; color: var(--o); letter-spacing: 1px; }
+        .dept-card small { font-size: 0.75rem; color: #aaa; text-transform: uppercase; }
 
         .congelata { filter: grayscale(1) blur(2px); pointer-events: none; opacity: 0.5; }
     </style>
@@ -69,18 +69,18 @@ index.html
 
     <div class="main-view">
         <header>
-            <span style="position: absolute; left: 10px; top: -10px; font-size: 2.5rem; cursor: pointer;" onclick="gestisciMusica()">📯</span>
+            <span style="position: absolute; left: 10px; top: -10px; font-size: 2.5rem; cursor: pointer;" onclick="gestisciMusica()" title="Il Corno">📯</span>
             <h1 class="logo-txt">ISEKAIZONE</h1>
-            <span style="position: absolute; right: 10px; top: -10px; font-size: 2.5rem; cursor: pointer;" onclick="apriModal('modal-viandante')">👤</span>
+            <span style="position: absolute; right: 10px; top: -10px; font-size: 2.5rem; cursor: pointer;" onclick="apriModal('modal-viandante')" title="Profilo">👤</span>
         </header>
 
         <main class="griglia">
-            <button class="stendardo" style="background:#315177;" onclick="alert('Cronache...')">Cronache della Gilda</button>
-            <button class="stendardo" style="background:#795738;" onclick="alert('Taverna...')">Taverna delle ballate</button>
+            <button class="stendardo" style="background:#315177;" onclick="alert('In viaggio verso Cronache...')">Cronache della Gilda</button>
+            <button class="stendardo" style="background:#795738;" onclick="alert('In viaggio verso Taverna...')">Taverna delle ballate</button>
             <button class="stendardo" style="background:#518F4F;" onclick="apriModal('modal-sigilli')">Sigilli della Perseveranza</button>
-            <button class="stendardo" style="background:#93194B;" onclick="alert('Quest & Pergamene...')">Albero delle Quest</button>
+            <button class="stendardo" style="background:#93194B;" onclick="alert('In viaggio verso Quest e Pergamene...')">Albero delle Quest</button>
             <button class="stendardo" style="background:#2D2D2E;" onclick="apriModal('modal-ministero')">Ministero delle Vie</button>
-            <button class="stendardo" style="background:#A9D1DF; color:black;" onclick="alert('Giuramenti...')">Sala dei Giuramenti</button>
+            <button class="stendardo" style="background:#A9D1DF; color:black;" onclick="alert('In viaggio verso Giuramenti...')">Sala dei Giuramenti</button>
         </main>
     </div>
 
@@ -95,11 +95,11 @@ index.html
         <div class="modal-inner" id="v-scheda-box" style="display:none;">
             <h2 style="color:var(--o); text-align:center;">SCHEDA PERSONALE</h2>
             <div id="scheda-content">
-                <div class="form-group"><label>NOME DI ELEZIONE:</label><input type="text"></div>
-                <div class="form-group"><label>PRONOMI:</label><input type="text"></div>
-                <div class="form-group"><label>IDENTITÀ DI GENERE:</label><input type="text"></div>
+                <div class="form-group"><label>NOME DI ELEZIONE:</label><input type="text" placeholder="Identità scelta"></div>
+                <div class="form-group"><label>PRONOMI:</label><input type="text" placeholder="es. lui/lei/loro"></div>
+                <div class="form-group"><label>IDENTITÀ DI GENERE:</label><input type="text" placeholder="La tua identità"></div>
             </div>
-            <button class="btn-action" onclick="alert('Salvato su Appwrite!'); chiudiModale('modal-viandante')">SALVA</button>
+            <button class="btn-action" onclick="alert('Salvato!'); chiudiModale('modal-viandante')">SALVA</button>
         </div>
     </div>
 
@@ -114,16 +114,16 @@ index.html
             <h2 style="color:var(--o); text-align:center;">CENTRO DI COMANDO</h2>
             <div class="admin-grid">
                 <div class="dept-card" onclick="reparto('SILVER00')">
-                    <b>SILVER00</b><small>EDITING LEVEL 0</small>
+                    <b>AMMINISTRAZIONE TOTALE</b><small>EDITING LEVEL 0</small>
                 </div>
                 <div class="dept-card" onclick="reparto('TITAN01')">
-                    <b>TITAN01</b><small>EDITING LEVEL 1</small>
+                    <b>EDITING E CONTENUTI</b><small>EDITING LEVEL 1</small>
                 </div>
                 <div class="dept-card" onclick="reparto('TITAN02')">
-                    <b>TITAN02</b><small>ARCHIVIO SCHEDE</small>
+                    <b>ARCHIVIO SCHEDE</b><small>VISUALIZZAZIONE E STAMPA</small>
                 </div>
                 <div class="dept-card" onclick="reparto('TITAN03')">
-                    <b>TITAN03</b><small>GESTIONE SIGILLI</small>
+                    <b>GESTIONE SIGILLI</b><small>RINNOVI E PAGAMENTI</small>
                 </div>
             </div>
             <button onclick="chiudiModale('modal-ministero')" style="background:none; border:none; color:gray; width:100%; margin-top:30px; cursor:pointer;">Disconnetti</button>
@@ -133,8 +133,8 @@ index.html
     <div id="modal-sigilli" class="modal">
         <div class="modal-inner" style="border-color:#518F4F;">
             <h2 style="color:#518F4F; text-align:center;">SIGILLI DELLA PERSEVERANZA</h2>
-            <p style="margin:20px 0; font-size:0.9rem;">Scongela la tua scheda: 5€ ogni 30 giorni.</p>
-            <button class="btn-action" style="background:#518F4F; color:white;" onclick="alert('Pagamento in corso...')">SCONGELA / RINNOVA</button>
+            <p style="margin:20px 0; font-size:0.9rem; text-align:center;">Scongela la tua scheda: contributo di 5€ per 30 giorni di energia identitaria.</p>
+            <button class="btn-action" style="background:#518F4F; color:white;" onclick="alert('Reindirizzamento al pagamento...')">SCONGELA / RINNOVA</button>
             <button onclick="chiudiModale('modal-sigilli')" style="background:none; border:none; color:gray; width:100%; margin-top:20px; cursor:pointer;">Chiudi</button>
         </div>
     </div>
@@ -142,7 +142,7 @@ index.html
     <script>
         function gestisciMusica() {
             const a = document.getElementById('musica-portale');
-            a.paused ? (a.play(), alert("Corno attivo")) : a.pause();
+            a.paused ? a.play() : a.pause();
         }
 
         function apriModal(id) { document.getElementById(id).style.display = 'flex'; }
@@ -156,22 +156,25 @@ index.html
         }
 
         function logicaMinistero() {
+            // Sigillo di primo livello per entrare nella dashboard
             if(document.getElementById('m-sigillo').value === "ISEKAI0") {
                 document.getElementById('m-sigillo-box').style.display = 'none';
                 document.getElementById('m-dashboard-box').style.display = 'block';
-            } else { alert("Sigillo negato."); }
+            } else { alert("Sigillo non riconosciuto."); }
         }
 
         function reparto(target) {
-            const p = prompt("Chiave d'Accesso Reparto:");
+            // Il prompt ora è generico per non suggerire i codici
+            const p = prompt("Inserire Chiave d'Accesso Reparto:");
             if(p === target) {
-                alert("Accesso autorizzato a " + target);
-                // SILVER00: Editing Level 0 [cite: 2026-03-05]
-                // TITAN01: Editing Level 1 (Quest & Pergamene) [cite: 2026-03-05]
-                // TITAN02: Visualizzazione, Stampa e Moderazione [cite: 2026-03-05]
-                // TITAN03: Gestione Sigilli e Rinnovi fisici [cite: 2026-03-05]
-                if(target === "SILVER00") location.href = "https://nicolalgbt-dot.github.io/IsekaiZone/admin-dashboard";
-            } else { alert("Chiave errata."); }
+                alert("Chiave accettata. Accesso al settore autorizzato.");
+                if(target === "SILVER00") {
+                    location.href = "https://nicolalgbt-dot.github.io/IsekaiZone/admin-dashboard";
+                }
+                // Qui si possono aggiungere i link per gli altri reparti (TITAN01-03) [cite: 2026-03-04]
+            } else {
+                alert("Chiave errata.");
+            }
         }
     </script>
 </body>
