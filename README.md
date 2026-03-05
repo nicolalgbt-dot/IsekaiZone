@@ -17,10 +17,10 @@ index.html
 
         @keyframes vento { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(1.5deg); } }
 
-        /* LAYOUT 1:8:1 - ADS LATERALI (10CM) */
-        .torre { position: fixed; top: 0; width: var(--striscetta-w); height: 100vh; z-index: 100; display: flex; flex-direction: column; align-items: center; padding-top: 20px; background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05); }
+        /* LAYOUT 1:8:1 - ADS LATERALI */
+        .torre { position: fixed; top: 0; width: var(--striscetta-w); height: 100vh; z-index: 100; display: flex; flex-direction: column; align-items: center; padding-top: 20px; background: rgba(0,0,0,0.03); }
         .sx { left: 0; } .dx { right: 0; }
-        .slot { width: 80%; aspect-ratio: 1/1.2; background: white; border: 1px solid var(--n); margin-bottom: 15px; box-shadow: inset 0 0 5px rgba(0,0,0,0.1); }
+        .slot { width: 80%; aspect-ratio: 1/1.2; background: white; border: 1px solid var(--n); margin-bottom: 15px; }
 
         /* AREA CENTRALE */
         .main-view { width: 70vw; max-width: 1050px; text-align: center; padding: 20px; flex-grow: 1; position: relative; z-index: 10; }
@@ -39,24 +39,24 @@ index.html
         }
         .stendardo:hover { filter: brightness(1.2); transform: scale(1.05); }
 
-        /* MODALI A TEMA SCURO */
+        /* MODALI */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .modal-inner { width: 100%; max-width: 550px; background: #1a1a1b; padding: 35px; border: 2px solid var(--o); color: white; box-shadow: 0 0 40px rgba(0,0,0,1); }
+        .modal-inner { width: 100%; max-width: 600px; background: #1a1a1b; padding: 35px; border: 2px solid var(--o); color: white; }
         
         .form-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; margin-bottom: 8px; color: var(--o); font-size: 0.8rem; letter-spacing: 1px; }
+        label { display: block; margin-bottom: 8px; color: var(--o); font-size: 0.8rem; }
         input { width: 100%; padding: 12px; background: #2a2a2b; border: 1px solid #444; color: white; font-family: sans-serif; }
         
-        .btn-action { background: var(--o); color: black; padding: 15px; width: 100%; border: none; cursor: pointer; font-weight: bold; font-size: 1rem; margin-top: 10px; transition: 0.2s; }
-        .btn-action:hover { background: white; }
+        .btn-action { background: var(--o); color: black; padding: 15px; width: 100%; border: none; cursor: pointer; font-weight: bold; margin-top: 10px; }
         .btn-admin { background: var(--c); color: white; margin-top: 15px; }
 
         /* DASHBOARD REPARTI */
         .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
         .dept-card { background: #222; border: 1px solid var(--o); padding: 20px; cursor: pointer; transition: 0.3s; text-align: center; }
         .dept-card:hover { background: var(--o); color: black; box-shadow: 0 0 20px var(--o); }
+        .dept-card b { display: block; margin-bottom: 5px; }
+        .dept-card small { font-size: 0.7rem; color: #aaa; }
 
-        /* STATO SCHEDA CONGELATA */
         .congelata { filter: grayscale(1) blur(2px); pointer-events: none; opacity: 0.5; }
     </style>
 </head>
@@ -75,12 +75,12 @@ index.html
         </header>
 
         <main class="griglia">
-            <button class="stendardo" style="background:#315177;" onclick="alert('In viaggio verso Cronache...')">Cronache della Gilda</button>
-            <button class="stendardo" style="background:#795738;" onclick="alert('In viaggio verso Taverna...')">Taverna delle ballate</button>
+            <button class="stendardo" style="background:#315177;" onclick="alert('Cronache...')">Cronache della Gilda</button>
+            <button class="stendardo" style="background:#795738;" onclick="alert('Taverna...')">Taverna delle ballate</button>
             <button class="stendardo" style="background:#518F4F;" onclick="apriModal('modal-sigilli')">Sigilli della Perseveranza</button>
-            <button class="stendardo" style="background:#93194B;" onclick="alert('In viaggio verso Quest...')">Albero delle Quest</button>
+            <button class="stendardo" style="background:#93194B;" onclick="alert('Quest & Pergamene...')">Albero delle Quest</button>
             <button class="stendardo" style="background:#2D2D2E;" onclick="apriModal('modal-ministero')">Ministero delle Vie</button>
-            <button class="stendardo" style="background:#A9D1DF; color:black;" onclick="alert('In viaggio verso Giuramenti...')">Sala dei Giuramenti</button>
+            <button class="stendardo" style="background:#A9D1DF; color:black;" onclick="alert('Giuramenti...')">Sala dei Giuramenti</button>
         </main>
     </div>
 
@@ -93,74 +93,68 @@ index.html
             <button onclick="chiudiModale('modal-viandante')" style="background:none; border:none; color:gray; width:100%; margin-top:20px; cursor:pointer;">Annulla</button>
         </div>
         <div class="modal-inner" id="v-scheda-box" style="display:none;">
-            <h2 style="color:var(--o); text-align:center;">LA TUA SCHEDA PERSONALE</h2>
-            <div id="scheda-content"> <div class="form-group"><label>NOME DI ELEZIONE:</label><input type="text" placeholder="Nome scelto"></div>
-                <div class="form-group"><label>PRONOMI:</label><input type="text" placeholder="es. lui/lei/loro"></div>
-                <div class="form-group"><label>IDENTITÀ DI GENERE:</label><input type="text" placeholder="La tua identità"></div>
+            <h2 style="color:var(--o); text-align:center;">SCHEDA PERSONALE</h2>
+            <div id="scheda-content">
+                <div class="form-group"><label>NOME DI ELEZIONE:</label><input type="text"></div>
+                <div class="form-group"><label>PRONOMI:</label><input type="text"></div>
+                <div class="form-group"><label>IDENTITÀ DI GENERE:</label><input type="text"></div>
             </div>
-            <div id="alert-congelato" style="display:none; color:var(--c); margin:10px 0; font-size:0.8rem;">SCHEDA CONGELATA: Rinnova i Sigilli per editare.</div>
-            <button class="btn-action" onclick="alert('Dati salvati su Appwrite!'); chiudiModale('modal-viandante')">SALVA IDENTITÀ</button>
-        </div>
-    </div>
-
-    <div id="modal-sigilli" class="modal">
-        <div class="modal-inner" style="border-color: #518F4F;">
-            <h2 style="color:#518F4F; text-align:center;">SIGILLI DELLA PERSEVERANZA</h2>
-            <p style="margin:20px 0; font-size:0.9rem; line-height:1.5;">L'energia per la tua scheda costa 5€ ogni 30 giorni. Mantieni attivo il sigillo per non congelare la tua identità.</p>
-            <div style="background:#000; padding:15px; border-radius:5px; margin-bottom:20px; text-align:center;">
-                <span style="font-size:1.5rem; color:white;">5,00 € / Mese</span>
-            </div>
-            <button class="btn-action" style="background:#518F4F; color:white;" onclick="alert('Connessione a piattaforma di pagamento...')">SCONGELA / RINNOVA</button>
-            <button onclick="chiudiModale('modal-sigilli')" style="background:none; border:none; color:gray; width:100%; margin-top:20px; cursor:pointer;">Torna al Portale</button>
+            <button class="btn-action" onclick="alert('Salvato su Appwrite!'); chiudiModale('modal-viandante')">SALVA</button>
         </div>
     </div>
 
     <div id="modal-ministero" class="modal">
-        <div class="modal-inner" id="m-sigillo-box" style="border-color: var(--c);">
+        <div class="modal-inner" id="m-sigillo-box">
             <h2 style="color:var(--c); text-align:center;">MINISTERO DELLE VIE</h2>
             <div class="form-group"><label>SIGILLO DI FRONTIERA:</label><input type="password" id="m-sigillo"></div>
             <button class="btn-action btn-admin" onclick="logicaMinistero()">SBLOCCA</button>
             <button onclick="chiudiModale('modal-ministero')" style="background:none; border:none; color:gray; width:100%; margin-top:20px; cursor:pointer;">Indietro</button>
         </div>
-        <div class="modal-inner" id="m-dashboard-box" style="display:none; max-width:600px;">
+        <div class="modal-inner" id="m-dashboard-box" style="display:none;">
             <h2 style="color:var(--o); text-align:center;">CENTRO DI COMANDO</h2>
             <div class="admin-grid">
-                <div class="dept-card" onclick="reparto('SILVER00')"><b>SILVER00</b><br><small>Ads & Management</small></div>
-                <div class="dept-card" onclick="reparto('TITAN01')"><b>TITAN01</b><br><small>Media & Vento</small></div>
-                <div class="dept-card" onclick="reparto('TITAN02')"><b>TITAN02</b><br><small>Archivio Schede</small></div>
-                <div class="dept-card" onclick="reparto('TITAN03')"><b>TITAN03</b><br><small>Abbonamenti 5€</small></div>
+                <div class="dept-card" onclick="reparto('SILVER00')">
+                    <b>SILVER00</b><small>EDITING LEVEL 0</small>
+                </div>
+                <div class="dept-card" onclick="reparto('TITAN01')">
+                    <b>TITAN01</b><small>EDITING LEVEL 1</small>
+                </div>
+                <div class="dept-card" onclick="reparto('TITAN02')">
+                    <b>TITAN02</b><small>ARCHIVIO SCHEDE</small>
+                </div>
+                <div class="dept-card" onclick="reparto('TITAN03')">
+                    <b>TITAN03</b><small>GESTIONE SIGILLI</small>
+                </div>
             </div>
             <button onclick="chiudiModale('modal-ministero')" style="background:none; border:none; color:gray; width:100%; margin-top:30px; cursor:pointer;">Disconnetti</button>
         </div>
     </div>
 
+    <div id="modal-sigilli" class="modal">
+        <div class="modal-inner" style="border-color:#518F4F;">
+            <h2 style="color:#518F4F; text-align:center;">SIGILLI DELLA PERSEVERANZA</h2>
+            <p style="margin:20px 0; font-size:0.9rem;">Scongela la tua scheda: 5€ ogni 30 giorni.</p>
+            <button class="btn-action" style="background:#518F4F; color:white;" onclick="alert('Pagamento in corso...')">SCONGELA / RINNOVA</button>
+            <button onclick="chiudiModale('modal-sigilli')" style="background:none; border:none; color:gray; width:100%; margin-top:20px; cursor:pointer;">Chiudi</button>
+        </div>
+    </div>
+
     <script>
-        // LOGICA MUSICA
         function gestisciMusica() {
             const a = document.getElementById('musica-portale');
             a.paused ? (a.play(), alert("Corno attivo")) : a.pause();
         }
 
-        // LOGICA MODALI
         function apriModal(id) { document.getElementById(id).style.display = 'flex'; }
         function chiudiModale(id) { document.getElementById(id).style.display = 'none'; }
 
-        // PUNTO 1: LOGIN -> SCHEDA (Simulazione controllo abbonamento)
         function logicaViandante() {
             if(document.getElementById('v-mail').value && document.getElementById('v-pass').value) {
                 document.getElementById('v-login-box').style.display = 'none';
                 document.getElementById('v-scheda-box').style.display = 'block';
-                
-                // Esempio logica congelamento (se Appwrite dice che sono passati >30gg)
-                let abbonamentoScaduto = false; // Cambiare in true per testare
-                if(abbonamentoScaduto) {
-                    document.getElementById('scheda-content').classList.add('congelata');
-                    document.getElementById('alert-congelato').style.display = 'block';
-                }
             }
         }
 
-        // PUNTO 4: MINISTERO
         function logicaMinistero() {
             if(document.getElementById('m-sigillo').value === "ISEKAI0") {
                 document.getElementById('m-sigillo-box').style.display = 'none';
@@ -169,11 +163,15 @@ index.html
         }
 
         function reparto(target) {
-            const p = prompt("Inserire codice reparto:");
+            const p = prompt("Chiave d'Accesso Reparto:");
             if(p === target) {
                 alert("Accesso autorizzato a " + target);
+                // SILVER00: Editing Level 0 [cite: 2026-03-05]
+                // TITAN01: Editing Level 1 (Quest & Pergamene) [cite: 2026-03-05]
+                // TITAN02: Visualizzazione, Stampa e Moderazione [cite: 2026-03-05]
+                // TITAN03: Gestione Sigilli e Rinnovi fisici [cite: 2026-03-05]
                 if(target === "SILVER00") location.href = "https://nicolalgbt-dot.github.io/IsekaiZone/admin-dashboard";
-            } else { alert("Codice errato."); }
+            } else { alert("Chiave errata."); }
         }
     </script>
 </body>
